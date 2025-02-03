@@ -46,7 +46,8 @@
     <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\TaskEntity\Validators\Properties\Completed\" />
+    <Folder Include="Features\TaskEntity\Validators\CreateTaskValidators\Properties\Completed\" />
+    <Folder Include="Features\TaskEntity\Validators\UpdateTaskValidators\Properties\Completed\" />
   </ItemGroup>
   <PropertyGroup>
     <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>

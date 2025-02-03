@@ -2,21 +2,21 @@
 using Application.Features.TaskEntity.Validators;
 using FluentValidation.TestHelper;
 
-namespace Tests.Features.TaskEntity.Validators.Properties.Title
+namespace Tests.Features.TaskEntity.Validators.UpdateTaskValidators.Properties.Title
 {
-    public class CreateTaskCommandValidatorTitleTest
+    public class UpdateTaskCommandValidatorTitleTest
     {
-        private readonly CreateTaskCommandValidator _validator;
-        public CreateTaskCommandValidatorTitleTest()
+        private readonly UpdateTaskCommandValidator _validator;
+        public UpdateTaskCommandValidatorTitleTest()
         {
-            _validator = new CreateTaskCommandValidator();
+            _validator = new UpdateTaskCommandValidator();   
         }
 
         [Fact]
-        public void CreateTask_WithEmptyTitle_ShouldHaveValidationError()
+        public void UpdateTask_WithEmptyTitle_ShouldHaveValidationError()
         {
             // Arrange 
-            var command = new CreateTaskCommand
+            var command = new UpdateTaskCommand
             {
                 Title = "",
                 Description = "Test Description",
@@ -29,11 +29,12 @@ namespace Tests.Features.TaskEntity.Validators.Properties.Title
             // Assert
             result.ShouldHaveValidationErrorFor(x => x.Title);
         }
+
         [Fact]
-        public void CreateTask_WithTooShortTitle_ShouldHaveValidationError()
+        public void UpdateTask_WithTooShortTitle_ShouldHaveValidationError()
         {
             // Arrange 
-            var command = new CreateTaskCommand
+            var command = new UpdateTaskCommand
             {
                 Title = "abc",
                 Description = "Test Description",
@@ -46,12 +47,13 @@ namespace Tests.Features.TaskEntity.Validators.Properties.Title
             // Assert
             result.ShouldHaveValidationErrorFor(x => x.Title);
         }
+
         [Fact]
-        public void CreateTask_WithTooLongTitle_ShouldHaveValidationError()
+        public void UpdateTask_WithTooLongTitle_ShouldHaveValidationError()
         {
             // Arrange 
             var data = "abcdefghijklmnopqrstuvwxyz";
-            var command = new CreateTaskCommand
+            var command = new UpdateTaskCommand
             {
                 Title = $"{data}{data}",
                 Description = "Test Description",
