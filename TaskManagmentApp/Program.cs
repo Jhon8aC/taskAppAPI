@@ -25,6 +25,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     );
 });
 
+// Enable Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200") 
+              .AllowAnyHeader()                    
+              .AllowAnyMethod();                  
+    });
+});
+
 // Register MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateTaskCommand>());
 // Register FluentValidation
@@ -51,6 +62,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Enable CORS with the specified policy
+app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 

@@ -1,5 +1,4 @@
 ﻿using Application.Features.TaskEntity.Commands;
-using AutoMapper;
 using Core.Interfaces;
 using MediatR;
 
@@ -16,6 +15,10 @@ namespace Application.Features.TaskEntity.Handlers
         // It uptades an existing task and saves it to the repository, then returns the task ID
         public async Task<Guid> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new Application.Exceptions.ValidationException(new List<string> { $"{nameof(request)} cannot be null." });
+            }
             // Fetch the existing task by ID
             var task = await _taskRepository.GetByIdAsync(request.TaskId);
 
@@ -26,9 +29,21 @@ namespace Application.Features.TaskEntity.Handlers
             }
 
             // Update only the fields that are not null and always the modified
-            if (request.Title != null) task.Title = request.Title;
-            if (request.Description != null) task.Description = request.Description;
-            if (request.Completed.HasValue) task.Completed = request.Completed.Value;
+            if (request.Title != null)
+            {
+                task.Title = request.Title;
+            }
+
+            if (request.Description != null)
+            {
+                task.Description = request.Description;
+            }
+
+            if (request.Completed.HasValue)
+            {
+                task.Completed = request.Completed.Value;
+            }
+
             task.LastModified = DateTime.UtcNow;
 
             // Save the updated task to the repository and return the task id

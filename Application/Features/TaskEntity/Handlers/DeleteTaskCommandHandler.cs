@@ -13,6 +13,11 @@ namespace Application.Features.TaskEntity.Handlers
         }
         public async Task <Guid> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new Application.Exceptions.ValidationException(new List<string> { $"{nameof(request)} cannot be null." });
+            }
+
             var task = await _taskRepository.GetByIdAsync(request.TaskId);
             if (task == null)
             {

@@ -3,7 +3,7 @@ using Application.Features.TaskEntity.Queries;
 using Core.Interfaces;
 using Moq;
 
-namespace Tests.Features.TaskEntity.Commands
+namespace Tests.Application.Features.TaskEntity.Handlers
 {
     public class GetAllTasksQueryHandlerTest
     {
@@ -42,8 +42,8 @@ namespace Tests.Features.TaskEntity.Commands
             var result = await handler.Handle(new GetAllTasksQuery(), CancellationToken.None);
 
             // Assert
-            Assert.NotNull(result);   
-            Assert.Empty(result);     
+            Assert.NotNull(result);
+            Assert.Empty(result);
         }
 
         [Fact]
@@ -58,8 +58,8 @@ namespace Tests.Features.TaskEntity.Commands
             var result = await handler.Handle(new GetAllTasksQuery(), CancellationToken.None);
 
             // Assert
-            Assert.NotNull(result);   
-            Assert.Empty(result);     
+            Assert.NotNull(result);
+            Assert.Empty(result);
         }
 
         [Fact]

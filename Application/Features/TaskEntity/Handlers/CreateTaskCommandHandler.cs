@@ -13,8 +13,12 @@ namespace Application.Features.TaskEntity.Handlers
         }
         // Handle method to process the CreateTaskCommand request
         // It creates a new task and saves it to the repository, then returns the task ID
-        public async Task<Guid> Handle(CreateTaskCommand request, CancellationToken cancellationtoken)
+        public async Task<Guid> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new Application.Exceptions.ValidationException(new List<string> { $"{nameof(request)} cannot be null." });
+            }
             // Creating a new TaskEntity object from the request data
             var task = new Core.Entities.TaskEntity
             {

@@ -15,6 +15,10 @@ namespace Application.Features.TaskEntity.Handlers
         // It retrieves the task entity from the repository
         public async Task<Core.Entities.TaskEntity> Handle(GetTaskByIdQuery request, CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new Application.Exceptions.ValidationException(new List<string> { $"{nameof(request)} cannot be null." });
+            }
             // Fetch the existing task by ID
             var task = await _taskRepository.GetByIdAsync(request.TaskId);
 

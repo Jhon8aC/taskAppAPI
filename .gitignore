@@ -23,3 +23,9 @@ project.lock.json
 # Temporary publish configuration files
 *.publishsettings
 
+# Ignore SonarQube folder
+.sonarqube/
+sonarqubecoverage/
+
+# Ignore test results
+Tests/TestResults/

@@ -2,14 +2,14 @@
 using Application.Features.TaskEntity.Validators;
 using FluentValidation.TestHelper;
 
-namespace Tests.Features.TaskEntity.Validators.UpdateTaskValidators.Properties.Title
+namespace Tests.Application.Features.TaskEntity.Validators.UpdateTaskValidators.Properties.Title
 {
     public class UpdateTaskCommandValidatorTitleTest
     {
         private readonly UpdateTaskCommandValidator _validator;
         public UpdateTaskCommandValidatorTitleTest()
         {
-            _validator = new UpdateTaskCommandValidator();   
+            _validator = new UpdateTaskCommandValidator();
         }
 
         [Fact]

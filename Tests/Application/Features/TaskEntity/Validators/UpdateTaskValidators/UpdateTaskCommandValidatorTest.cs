@@ -2,7 +2,7 @@
 using Application.Features.TaskEntity.Validators;
 using FluentValidation.TestHelper;
 
-namespace Tests.Features.TaskEntity.Validators.UpdateTaskValidators
+namespace Tests.Application.Features.TaskEntity.Validators.UpdateTaskValidators
 {
     public class UpdateTaskCommandValidatorTest
     {
@@ -19,10 +19,10 @@ namespace Tests.Features.TaskEntity.Validators.UpdateTaskValidators
             // Arrange
             var command = new UpdateTaskCommand
             {
-                TaskId = Guid.NewGuid(), 
-                Title = "New Title", 
-                Description = "New Description", 
-                Completed = true 
+                TaskId = Guid.NewGuid(),
+                Title = "New Title",
+                Description = "New Description",
+                Completed = true
             };
 
             // Act

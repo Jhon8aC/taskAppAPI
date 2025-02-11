@@ -18,5 +18,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Core.csproj" />
   </ItemGroup>
-
+	<!-- Exclude this for coverage -->
+	<PropertyGroup>
+		<Exclude>[Infraestructure.Contexts.ApplicationDbContext]*</Exclude>
+		<Exclude>[Infraestructure.Migrations]*</Exclude>
+	</PropertyGroup>
+	
 </Project>

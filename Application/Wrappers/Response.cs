@@ -7,8 +7,14 @@ namespace Application.Wrappers
         {
 
         }
-        // Constructor to initialize the response with data and an optional message
-        public Response(T data, string? message = null)
+        // Constructor to initialize the response with data
+        public Response(T data)
+        {
+            Succeeded = true;
+            Data = data;
+        }
+        // Constructor to initialize the response with data and a message
+        public Response(T data, string message)
         {
             Succeeded = true;
             Message = message;

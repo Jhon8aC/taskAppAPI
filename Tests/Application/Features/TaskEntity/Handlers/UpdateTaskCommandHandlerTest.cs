@@ -3,9 +3,9 @@ using Application.Features.TaskEntity.Commands;
 using Application.Features.TaskEntity.Handlers;
 using Core.Interfaces;
 using Moq;
-using System;
+using Application.Exceptions;
 
-namespace Tests.Features.TaskEntity.Handlers
+namespace Tests.Application.Features.TaskEntity.Handlers
 {
     public class UpdateTaskCommandHandlerTest
     {
@@ -73,8 +73,25 @@ namespace Tests.Features.TaskEntity.Handlers
 
             // Assert
             Assert.IsType<KeyNotFoundException>(exception);
-            Assert.Contains("Task with ID", exception.Message); 
+            Assert.Contains("Task with ID", exception.Message);
         }
+
+        [Fact]
+        public async Task UpdateTask_WithNullRequest_ShouldThrowValidationException()
+        {
+            // Arrange
+            var repositoryMock = new Mock<ITaskRepository>();
+            var handler = new UpdateTaskCommandHandler(repositoryMock.Object);
+
+            // Act
+            var exception = await Assert.ThrowsAsync<ValidationException>(() =>
+                handler.Handle(null, CancellationToken.None));
+
+            // Assert
+            Assert.IsType<ValidationException>(exception);
+            Assert.Contains("cannot be null", exception.Errors.FirstOrDefault(), StringComparison.OrdinalIgnoreCase);
+        }
+
     }
 }
 

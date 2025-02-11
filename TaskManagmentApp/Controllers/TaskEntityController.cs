@@ -9,7 +9,7 @@ namespace TaskManagmentApp.Controllers
     [Route("api/[controller]")]
     public class TaskEntityController : ControllerBase
     {
-        public readonly IMediator _mediator;
+        private readonly IMediator _mediator;
         public TaskEntityController(IMediator mediator)
         {
             _mediator = mediator;

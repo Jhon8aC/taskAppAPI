@@ -1,44 +1,40 @@
 ﻿using Application.Features.TaskEntity.Commands;
-using Application.Features.TaskEntity.Handlers;
 using Application.Features.TaskEntity.Validators;
-using Core.Interfaces;
 using FluentValidation.TestHelper;
-using Moq;
 
-namespace Tests.Features.TaskEntity.Validators.UpdateTaskValidators.Properties.Description
+namespace Tests.Application.Features.TaskEntity.Validators.CreateTaskValidators.Properties.Description
 {
-    public class UpdateTaskCommandValidatorDescriptionTest
+    public class CreateTaskCommandValidatorDescriptionTest
     {
-        private readonly UpdateTaskCommandValidator _validator;
-        public UpdateTaskCommandValidatorDescriptionTest()
+        private readonly CreateTaskCommandValidator _validator;
+        public CreateTaskCommandValidatorDescriptionTest()
         {
-            _validator = new UpdateTaskCommandValidator();
+            _validator = new CreateTaskCommandValidator();
         }
 
         [Fact]
-        public void UpdateTask_WithEmptyDescription_ShouldHaveValidationError()
+        public void CreateTask_WithEmptyDescription_ShouldHaveValidationError()
         {
-            // Arrange
-            var command = new UpdateTaskCommand
+            // Arrange 
+            var command = new CreateTaskCommand
             {
-                TaskId = Guid.NewGuid(),
-                Title = "New Title",
-                Description = "New Description",
-                Completed = true
+                Title = "Test Title",
+                Description = "",
+                Completed = false
             };
 
-            // Act
+            // Act 
             var result = _validator.TestValidate(command);
 
             // Assert
-            result.ShouldNotHaveValidationErrorFor(x => x.Description);
+            result.ShouldHaveValidationErrorFor(x => x.Description);
         }
 
         [Fact]
-        public void UpdateTask_WithTooShortDescription_ShouldHaveValidationError()
+        public void CreateTask_WithTooShortDescription_ShouldHaveValidationError()
         {
             // Arrange 
-            var command = new UpdateTaskCommand
+            var command = new CreateTaskCommand
             {
                 Title = "Test Title",
                 Description = "abc",
@@ -53,11 +49,11 @@ namespace Tests.Features.TaskEntity.Validators.UpdateTaskValidators.Properties.D
         }
 
         [Fact]
-        public void UpdateTask_WithTooLongDescription_ShouldHaveValidationError()
+        public void CreateTask_WithTooLongDescription_ShouldHaveValidationError()
         {
             // Arrange 
             var data = "abcdefghijklmnopqrstuvwxyz";
-            var command = new UpdateTaskCommand
+            var command = new CreateTaskCommand
             {
                 Title = "Test Title",
                 Description = $"{data}{data}{data}{data}{data}{data}{data}{data}",

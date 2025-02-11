@@ -11,7 +11,7 @@ namespace TaskManagmentApp.Middlewares
         {
             _next = next;
         }
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace TaskManagmentApp.Middlewares
             {
                 var response = context.Response;
                 response.ContentType = "application/json";
-                var responseData = new Response<string>() { Succeeded  = false, Message = error?.Message };
+                var responseData = new Response<string> { Succeeded  = false, Message = error?.Message };
                 switch (error)
                 {
                     case Application.Exceptions.ApiException e:
@@ -29,7 +29,7 @@ namespace TaskManagmentApp.Middlewares
                         break;
                     case Application.Exceptions.ValidationException e:
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        responseData.Errors = e.Errors;
+                        responseData.Errors = e.Errors.ToList();
                         break;
                     case FluentValidation.ValidationException e:
                         response.StatusCode = (int)HttpStatusCode.BadRequest;

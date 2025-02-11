@@ -2,7 +2,7 @@
 using Application.Features.TaskEntity.Validators;
 using FluentValidation.TestHelper;
 
-namespace Tests.Features.TaskEntity.Validators.CreateTaskValidators.Properties.Title
+namespace Tests.Application.Features.TaskEntity.Validators.CreateTaskValidators.Properties.Title
 {
     public class CreateTaskCommandValidatorTitleTest
     {
